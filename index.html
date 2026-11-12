@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LayerX AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#090b12;color:#fff;
+ font-family:Arial,sans-serif;padding:20px;
+}
+header{text-align:center;padding:20px}
+h1{font-size:36px;color:#9d7aff;margin:5px}
+p{color:#a9a9ba;line-height:1.7}
+main{max-width:650px;margin:auto}
+.panel{
+ background:#141725;border:1px solid #292e43;
+ border-radius:18px;padding:20px;margin:18px 0;
+}
+.upload{
+ display:block;text-align:center;padding:35px 10px;
+ border:2px dashed #7655d9;border-radius:14px;
+ cursor:pointer;color:#c5afff;
+}
+input{display:none}
+button{
+ width:100%;padding:15px;border:0;border-radius:12px;
+ background:#7954df;color:white;font-size:16px;
+ margin-top:12px;cursor:pointer;
+}
+button:disabled{background:#383447;color:#aaa}
+img{max-width:100%;border-radius:12px;margin-top:15px}
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.part{background:#20263a;padding:12px;border-radius:10px}
+.note{font-size:13px;color:#aaa}
+</style>
+</head>
+<body>
+<header>
+<h1>LayerX</h1>
+<p>AI Character Decomposition Studio</p>
+</header>
+
+<main>
+<section class="panel">
+<h3>01 — Upload Character</h3>
+<label class="upload">
+<span>＋ اختر صورة الشخصية</span>
+<input id="file" type="file" accept="image/*">
+</label>
+<img id="preview" hidden>
+<p id="filename" class="note">لم يتم اختيار صورة بعد</p>
+</section>
+
+<section class="panel">
+<h3>02 — Character Layers</h3>
+<div class="parts">
+<div class="part">Hair</div>
+<div class="part">Head / Face</div>
+<div class="part">Eyes</div>
+<div class="part">Pupils</div>
+<div class="part">Mouth</div>
+<div class="part">Neck</div>
+<div class="part">Torso</div>
+<div class="part">Arms / Hands</div>
+<div class="part">Fingers</div>
+<div class="part">Legs</div>
+<div class="part">Clothes</div>
+<div class="part">Accessories</div>
+</div>
+<button id="split" disabled>AI Separate Layers</button>
+<p class="note">محرك فصل الصور وإعادة بناء الأجزاء يحتاج إلى ربط بخادم ذكاء اصطناعي.</p>
+</section>
+
+<section class="panel">
+<h3>03 — Project Package</h3>
+<p>Alight Motion Project Export</p>
+<button disabled>Generate QR Code</button>
+<p class="note">تصدير QR الحقيقي غير مفعّل بعد؛ يلزم تنفيذ صيغة المشروع واختبار استيرادها في Alight Motion.</p>
+</section>
+</main>
+
+<script>
+const file=document.getElementById('file');
+const preview=document.getElementById('preview');
+const filename=document.getElementById('filename');
+const split=document.getElementById('split');
+
+file.addEventListener('change',()=>{
+ const image=file.files[0];
+ if(!image)return;
+ preview.src=URL.createObjectURL(image);
+ preview.hidden=false;
+ filename.textContent=image.name;
+ split.disabled=false;
+});
+</script>
+</body>
+</html>
